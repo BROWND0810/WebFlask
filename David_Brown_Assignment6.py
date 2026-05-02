@@ -111,8 +111,7 @@ def home():
 
     <br><br>
 
-    <p>Use /books for the REST API.</p>
-    """
+   """
 
 
 """
