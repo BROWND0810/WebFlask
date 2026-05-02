@@ -65,7 +65,7 @@ with app.app_context():
 
 """
 Home Page:
-Shows student records and links to the student form, book test, calculator, and JSON API.
+Shows links to each part of the assignment.
 """
 
 @app.route('/')
@@ -83,35 +83,36 @@ def home():
         """
 
     return f"""
-    <h1>Assignment 6 Flask App</h1>
+    <html>
+    <head>
+        <title>Assignment 6 Flask App</title>
+    </head>
 
-    <h2>Student Records</h2>
+    <body>
+        <h1>Assignment 6 Flask App</h1>
 
-    {student_list}
+        <h2>Student Records</h2>
 
-    <br>
+        {student_list}
 
-    <a href="/student_form">Add Student</a>
+        <br>
 
-    <br><br>
+        <a href="/student_form">Add Student</a>
 
-    <a href="/calc">Open Calculator</a>
+        <br><br>
 
-    <br><br>
+        <a href="/calc">Open Calculator</a>
 
-    <a href="/book_form">Add Book for JSON Test</a>
+        <br><br>
 
-    <br><br>
+        <a href="/book_form">Add Book</a>
 
-    <a href="/add_sample_book">Add Sample Book</a>
+        <br><br>
 
-    <br><br>
-
-    <a href="/books">View Books JSON</a>
-
-    <br><br>
-
-   """
+        <a href="/books">View Books JSON</a>
+    </body>
+    </html>
+    """
 
 
 """
@@ -122,25 +123,33 @@ Student form page.
 @app.route('/student_form')
 def student_form():
     return """
-    <h1>Add Student</h1>
+    <html>
+    <head>
+        <title>Add Student</title>
+    </head>
 
-    <form action="/add" method="POST">
-        <label>Student Name:</label>
-        <input type="text" name="name" required>
+    <body>
+        <h1>Add Student</h1>
 
-        <br><br>
+        <form action="/add" method="POST">
+            <label>Student Name:</label>
+            <input type="text" name="name" required>
 
-        <label>Course:</label>
-        <input type="text" name="course" required>
+            <br><br>
 
-        <br><br>
+            <label>Course:</label>
+            <input type="text" name="course" required>
 
-        <button type="submit">Add Student</button>
-    </form>
+            <br><br>
 
-    <br>
+            <button type="submit">Add Student</button>
+        </form>
 
-    <a href="/">Back Home</a>
+        <br>
+
+        <a href="/">Back Home</a>
+    </body>
+    </html>
     """
 
 
@@ -249,25 +258,33 @@ This lets me add a book from the browser.
 @app.route('/book_form')
 def book_form():
     return """
-    <h1>Add Book for JSON Test</h1>
+    <html>
+    <head>
+        <title>Add Book</title>
+    </head>
 
-    <form action="/add_book_form" method="POST">
-        <label>Book Title:</label>
-        <input type="text" name="title" required>
+    <body>
+        <h1>Add Book</h1>
 
-        <br><br>
+        <form action="/add_book_form" method="POST">
+            <label>Book Title:</label>
+            <input type="text" name="title" required>
 
-        <label>Author:</label>
-        <input type="text" name="author" required>
+            <br><br>
 
-        <br><br>
+            <label>Author:</label>
+            <input type="text" name="author" required>
 
-        <button type="submit">Add Book</button>
-    </form>
+            <br><br>
 
-    <br>
+            <button type="submit">Add Book</button>
+        </form>
 
-    <a href="/">Back Home</a>
+        <br>
+
+        <a href="/">Back Home</a>
+    </body>
+    </html>
     """
 
 
@@ -291,25 +308,6 @@ def add_book_form():
 
 
 """
-Lab 2:
-Quick sample book route.
-This adds one sample book for JSON testing.
-"""
-
-@app.route('/add_sample_book')
-def add_sample_book():
-    sample_book = Book(
-        title="Python Basics",
-        author="David Brown"
-    )
-
-    db.session.add(sample_book)
-    db.session.commit()
-
-    return redirect(url_for('get_books'))
-
-
-"""
 Lab 3:
 Calculator form.
 This uses GET method only.
@@ -318,34 +316,42 @@ This uses GET method only.
 @app.route('/calc')
 def calc():
     return """
-    <h1>Simple Calculator</h1>
+    <html>
+    <head>
+        <title>Simple Calculator</title>
+    </head>
 
-    <form action="/result" method="GET">
-        <label>Number 1:</label>
-        <input type="number" name="num1" required>
+    <body>
+        <h1>Simple Calculator</h1>
 
-        <br><br>
+        <form action="/result" method="GET">
+            <label>Number 1:</label>
+            <input type="number" name="num1" required>
 
-        <label>Number 2:</label>
-        <input type="number" name="num2" required>
+            <br><br>
 
-        <br><br>
+            <label>Number 2:</label>
+            <input type="number" name="num2" required>
 
-        <label>Operation:</label>
-        <select name="operation">
-            <option value="add">Add</option>
-            <option value="subtract">Subtract</option>
-            <option value="multiply">Multiply</option>
-        </select>
+            <br><br>
 
-        <br><br>
+            <label>Operation:</label>
+            <select name="operation">
+                <option value="add">Add</option>
+                <option value="subtract">Subtract</option>
+                <option value="multiply">Multiply</option>
+            </select>
 
-        <button type="submit">Calculate</button>
-    </form>
+            <br><br>
 
-    <br>
+            <button type="submit">Calculate</button>
+        </form>
 
-    <a href="/">Back Home</a>
+        <br>
+
+        <a href="/">Back Home</a>
+    </body>
+    </html>
     """
 
 
@@ -378,17 +384,25 @@ def result():
         symbol = "?"
 
     return f"""
-    <h1>Calculator Result</h1>
+    <html>
+    <head>
+        <title>Calculator Result</title>
+    </head>
 
-    <p>{num1} {symbol} {num2} = {answer}</p>
+    <body>
+        <h1>Calculator Result</h1>
 
-    <br>
+        <p>{num1} {symbol} {num2} = {answer}</p>
 
-    <a href="/calc">Try Again</a>
+        <br>
 
-    <br><br>
+        <a href="/calc">Try Again</a>
 
-    <a href="/">Back Home</a>
+        <br><br>
+
+        <a href="/">Back Home</a>
+    </body>
+    </html>
     """
 
 
